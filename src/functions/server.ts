@@ -1,6 +1,6 @@
 import {
     HOSTNAME, IPV4_ADDRESS, AP_SSID, AP_PASSWORD, WIFI_SSID, WIFI_PASSWORD, PORT
-} from "../constants"
+} from "../config"
 
 import express from "express"
 import cors from "cors"
@@ -15,7 +15,7 @@ import {
     getWiredDevices,
     getWirelessDevices,
     createAccessPoint,
-    listSavedConnections,
+    listSavedNetworks,
     getActiveConnections,
     activateConnection,
     forgetNetwork,
@@ -154,7 +154,7 @@ const api = () => {
     })
 
     server.get("/saved", async (request, response) => {
-        response.status(200).json(await listSavedConnections())
+        response.status(200).json(await listSavedNetworks())
     })
 
     server.get("/scan", async (request, response) => {

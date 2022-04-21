@@ -1,13 +1,4 @@
-import invokeDBUS from "../dbus"
-
-export const getNetworkDevicesByPath = async (): Promise<string[]> => {
-	return await invokeDBUS({
-		destination: "org.freedesktop.NetworkManager",
-		path: "/org/freedesktop/NetworkManager",
-		interface: "org.freedesktop.NetworkManager",
-		member: "GetDevices"
-	})
-}
+import invokeDBUS from "../../dbus"
 
 export const getConnectionSettings = async (networkPath: string): Promise<any[]> => {
 	return await invokeDBUS({

@@ -1,9 +1,6 @@
 import {
     HOSTNAME, IPV4_ADDRESS, AP_SSID, AP_PASSWORD, WIFI_SSID, WIFI_PASSWORD, PORT
-} from "./constants"
-
-import express from "express"
-import cors from "cors"
+} from "./config"
 
 import api from "./functions/server"
 
@@ -11,19 +8,17 @@ import { getHostname, setHostname } from "./services/avahi"
 
 import {
     addNetwork,
-    disableDevice,
     scanWirelessNetworks,
-    checkConnectivity,
-    getWiredDevices,
+    // checkConnectivity,
+    // getWiredDevices,
     getWirelessDevices,
     createAccessPoint,
-    listSavedConnections,
+    // listSavedNetworks,
     getActiveConnections,
-    activateConnection,
-    forgetNetwork,
+    // activateConnection,
     internetSharingOverEthernet,
-    setStaticIpv4,
-    getAccessPointDevices
+    // setStaticIpv4,
+    // getAccessPointDevices
 } from "./services/networkmanager"
 
 // import changeHostname from "./services/avahi"
@@ -33,21 +28,17 @@ const initializeNetwork = async () => {
     // Configure hostname device discoverability using Avahi
 
     try {
-        const hostname = await getHostname()
-        if (hostname !== HOSTNAME) {
+        const hostname2 = await getHostname()
+        console.log(hostname2)
+        if (hostname2 !== HOSTNAME) {
             await setHostname(HOSTNAME)
             console.log(`Hostname set to ${HOSTNAME}`)
         }
-        console.log(`DashBox services can be accessed at http://${HOSTNAME}.local.`)
+        console.log(`Services can be accessed at http://${HOSTNAME}.local.`)
     }
     catch (error) {
-        console.log(error)
+        console.log(`Unable to change hostname: ${error}`)
     }
-
-    // Add a wireless netwrok
-    // Network Manager will automatically connect to saved networks if available
-    // Overridden by activateConnection(wiressNetwork['path'])
-    // Has built-in validation to avoid saving duplicate wireless networks
 
     try {
         await addNetwork(WIFI_SSID, WIFI_PASSWORD)
@@ -55,6 +46,8 @@ const initializeNetwork = async () => {
     } catch (error) {
         console.warn(error)
     }
+
+    // const savedConnections = await listSavedConnections()
 
     // Get list of wireless devices (RPi onboard WiFi, TP-Link donlge, etc)
     

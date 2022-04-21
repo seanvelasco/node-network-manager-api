@@ -1,8 +1,8 @@
-import { systemBus, Message, Bus } from 'dbus-native';
+import { systemBus, Message, Bus } from 'dbus-native'
 
 const dbus: Bus = systemBus();
 
-const invokeDBUS = (message: Message): PromiseLike<any> => {
+const invokeDBUS = (message: Message): Promise<any> => {
 	return new Promise((resolve, reject) => {
 		dbus.invoke(message, (error, response) => {
 			if (error) {
@@ -10,8 +10,8 @@ const invokeDBUS = (message: Message): PromiseLike<any> => {
 			} else {
 				resolve(response);
 			}
-		});
-	});
+		})
+	})
 }
 
 export default invokeDBUS

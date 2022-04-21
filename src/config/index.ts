@@ -2,11 +2,11 @@ const PORT = process.env.PORT || 3000
 
 // Network-specific configuration
 
-const HOSTNAME = process.env.HOSTNAME; // Hostname for device, determines how it is accessed (e.g., "http://dashlabs.local")
-const AP_SSID = process.env.AP_SSID; // Access Point SSID
-const AP_PASSWORD = process.env.AP_PASSWORD; // Access Point Password
-const WIFI_SSID = process.env.WIFI_SSID; // Default wireless network that DashBox will connect in setup mode
-const WIFI_PASSWORD = process.env.WIFI_PASSWORD; // Default wireless network password
+const HOSTNAME = process.env.HOSTNAME || "Dashlabs"; // Hostname for device, determines how it is accessed (e.g., "http://dashlabs.local")
+const AP_SSID = process.env.AP_SSID || "Dashlabs"; // Access Point SSID
+const AP_PASSWORD = process.env.AP_PASSWORD || "dashlabs"; // Access Point Password
+const WIFI_SSID = process.env.WIFI_SSID || "Dashlabs"; // Default wireless network that DashBox will connect in setup mode
+const WIFI_PASSWORD = process.env.WIFI_PASSWORD || "dashlabs"; // Default wireless network password
 
 // Static IP configuration
 const IPV4_ADDRESS = "10.42.0.10"; // Desired IPV4 address of the device
